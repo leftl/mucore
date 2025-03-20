@@ -13,8 +13,12 @@ FROM ghcr.io/ublue-os/ucore:stable
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 
-COPY build.sh /tmp/build.sh
+COPY tree/ /
+COPY build.sh /tmp
+COPY cosign.pub /tmp/signing
 
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
+    /tmp/signed-repo.sh && \
+    /tmp/cleanup.sh && \
     ostree container commit
