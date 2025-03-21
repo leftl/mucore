@@ -10,7 +10,10 @@ on:
     branches:
       - main
     paths-ignore:
-      - '**/README.md'
+      - '**/*.md'
+      - '**/iso.toml'
+      - '**/images.toml'
+      - '.github/workflows/build-iso.yml'
   workflow_dispatch:
 
 env:
