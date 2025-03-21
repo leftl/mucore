@@ -77,6 +77,7 @@ jobs:
           config-file: ./image.toml
           image: ${{ env.IMAGE_REGISTRY }}:${{ env.DEFAULT_TAG }}
           type: 'qcow2'
+          rootfs: 'xfs'
 
       - name: Upload ISOs and Checksum to Job Artifacts
         if: inputs.upload-to-s3 != true && github.event_name != 'pull_request'
