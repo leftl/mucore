@@ -19,6 +19,7 @@ on:
     branches:
       - main
     paths:
+      - './image.toml'
       - './iso.toml'
       - './.github/workflows/build-iso.yml'
       - './Justfile'
@@ -69,12 +70,13 @@ jobs:
 
       - name: Build ISO
         id: build
-        uses: ublue-os/bootc-image-builder-action@main
+        uses: leftl/bootc-image-builder-action@main
         with:
           bootc-image-builder-image: ghcr.io/centos-workstation/bootc-image-builder:latest
           use-librepo: true
-          config-file: ./iso.toml
+          config-file: ./image.toml
           image: ${{ env.IMAGE_REGISTRY }}:${{ env.DEFAULT_TAG }}
+          type: 'qcow2'
 
       - name: Upload ISOs and Checksum to Job Artifacts
         if: inputs.upload-to-s3 != true && github.event_name != 'pull_request'
