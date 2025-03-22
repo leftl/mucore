@@ -76,7 +76,7 @@ jobs:
           use-librepo: true
           config-file: ./image.toml
           image: ${{ env.IMAGE_REGISTRY }}:${{ env.DEFAULT_TAG }}
-          type: 'qcow2'
+          type: 'ami'
           rootfs: 'xfs'
 
       - name: Upload ISOs and Checksum to Job Artifacts
