@@ -67,10 +67,8 @@ jobs:
         with:
           bootc-image-builder-image: ghcr.io/centos-workstation/bootc-image-builder:latest
           use-librepo: true
-          config-file: ./image.toml
+          config-file: ./iso.toml
           image: ${{ env.IMAGE_REGISTRY }}:${{ env.DEFAULT_TAG }}
-          type: 'ami'
-          rootfs: 'xfs'
 
       - name: Upload ISOs and Checksum to Job Artifacts
         if: inputs.upload-to-s3 != true && github.event_name != 'pull_request'
