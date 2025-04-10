@@ -5,12 +5,14 @@ CROWDSEC_REPO_URL='https://packagecloud.io/install/repositories/crowdsec/crowdse
 
 curl -sSf "${CROWDSEC_REPO_URL}" >/etc/yum.repos.d/crowdsec.repo
 
+dnf5 install -y yum-utils --disablerepo="crowdsec_crowdsec"
+dnf5 makecache -y --disablerepo='*' --enablerepo="crowdsec_crowdsec"
+
 # note: neovim is probably better used from distrobox or similar, but I don't want to :-)
 dnf5 install --refresh -y neovim \
 	htop \
 	ripgrep \
 	fd \
-	dnf5-plugins \
 	crowdsec-firewall-bouncer-nftables
 
-dnf5 config-manager setopt crowdsec\*.enabled=0
+sed -i'' 's/enabled=1/enabled=0/' /etc/yum.repos.d/crowdsec.repo
