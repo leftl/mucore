@@ -5,6 +5,8 @@ CROWDSEC_REPO_URL='https://packagecloud.io/install/repositories/crowdsec/crowdse
 
 curl -sSf "${CROWDSEC_REPO_URL}" >/etc/yum.repos.d/crowdsec.repo
 
+sed -i'' 's/gpgcheck=1/gpgcheck=0/' /etc/yum.repos.d/crowdsec.repo
+
 dnf5 install -y yum-utils --disablerepo="crowdsec_crowdsec"
 dnf5 makecache -y --disablerepo='*' --enablerepo="crowdsec_crowdsec"
 
